@@ -93,7 +93,7 @@ int main(int argc, char** argv)
 
     try {
         CCipher::encrypt(password, inData, inSize, encryptData, encryptSize);
-        CCipher::decrypt(password, encryptData, (int)encryptSize, outData, outSize);
+        CCipher::decrypt(password, encryptData, encryptSize, outData, outSize);
 
         std::cout << "In     \tsize: " << inSize << " data: " << inData << std::endl;
         std::cout << "Encrypt\tsize: " << encryptSize << " data: " << encryptData << std::endl;
