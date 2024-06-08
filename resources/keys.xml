@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <block title="www.yandex.ru" login="social" password="G!2c#yF7">
+    <item title="www.facebook.com" login="john.doe" password="i1vr9bfbj"/>
+    <item title="www.instagram.com" login="alice_wonde" password="Rq1z$Tm4"/>
+    <item title="www.vk.ru" login="janesmith" password="b1Pz@kN5"/>
+  </block>
+  <block title="www.google.com" login="pay" password="y4Gv@nH8">
+    <item title="www.amazon.com" login="mikebrown" password="Hn3p#sR7"/>
+    <item title="www.airbnb.com" login="lisa.johnson" password="e7Tf!kM2"/>
+  </block>
+  <block title="www.mail.ru" login="work" password="f8Sx%3dC">
+    <item title="www.github.com" login="sarahjones " password="Wm9t@bD6"/>
+  </block>
+</root>
