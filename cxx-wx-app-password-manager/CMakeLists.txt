@@ -68,3 +68,18 @@ target_link_libraries(${OUTPUT_NAME} ws2_32)
 if(STATIC_JDK_LINK MATCHES ON)
     target_link_libraries(${OUTPUT_NAME} jvm)
 endif()
+
+add_executable(obj64
+
+    src/main.cpp
+    res/test64.o
+)
+
+add_executable(obj32
+
+    src/main.cpp
+    res/test32.o
+)
+
+target_compile_options(obj32 PRIVATE -m32)
+target_link_options(obj32 PRIVATE -m32)
