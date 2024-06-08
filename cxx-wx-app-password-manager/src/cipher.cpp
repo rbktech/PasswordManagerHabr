@@ -1,5 +1,7 @@
 #include "cipher.h"
 
+#include <openssl/evp.h>
+
 #define SIZE_KEY 32
 #define SIZE_SALT 256
 

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <openssl/evp.h>
-
 #define SIZE_PASSWORD 4
 
 typedef unsigned char uchar;

@@ -50,13 +50,13 @@ endif()
 add_executable(${OUTPUT_NAME}
 
     src/main.cpp
-    src/jnicloudelib.cpp
-    #src/cipher.cpp
+    #src/jnicloudelib.cpp
+    src/cipher.cpp
     #src/xmlfile.cpp
     #src/mainframe.cpp
 
-    #res/iv.o
-    #res/salt.o
+    res/iv.o
+    res/salt.o
 )
 
 target_link_libraries(${OUTPUT_NAME} ${wxWidgets_LIBRARIES})

@@ -1,4 +1,4 @@
-#define APP 2
+#define APP 3
 
 #if APP == 0
 
@@ -84,16 +84,16 @@ int main(int argc, char** argv)
     int inSize = SIZE_BUFFER;
 
     uchar encryptData[SIZE_BUFFER] = { 0 };
-    int encryptSize = SIZE_BUFFER;
+    uint encryptSize = SIZE_BUFFER;
 
     uchar outData[SIZE_BUFFER] = { 0 };
-    int outSize = SIZE_BUFFER;
+    uint outSize = SIZE_BUFFER;
 
     memcpy(inData, "Hello habr", inSize = 10);
 
     try {
         CCipher::encrypt(password, inData, inSize, encryptData, encryptSize);
-        CCipher::decrypt(password, encryptData, encryptSize, outData, outSize);
+        CCipher::decrypt(password, encryptData, (int)encryptSize, outData, outSize);
 
         std::cout << "In     \tsize: " << inSize << " data: " << inData << std::endl;
         std::cout << "Encrypt\tsize: " << encryptSize << " data: " << encryptData << std::endl;
