@@ -1,4 +1,4 @@
-#define APP 7
+#define APP 0
 
 #if APP == 0
 
@@ -12,8 +12,8 @@ int main(int argc, char** argv)
 
     try {
         cloudLib.init();
-        cloudLib.run("upload", "<token>", "test", RESOURCES "/upload.txt");
-        cloudLib.run("load", "<token>", "test/upload.txt", RESOURCES "/load.txt");
+        cloudLib.run("upload", "<token>", "test", RESOURCES "/keys.xml");
+        cloudLib.run("load", "<token>", "test/keys.xml", RESOURCES "/test/keys.xml");
     } catch(const char* message) {
         std::cout << message << std::endl;
     }
