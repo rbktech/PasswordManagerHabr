@@ -5,6 +5,8 @@ project(win-app-cxx-password-manager VERSION 1.0.0)
 set(ROOT "C:/PasswordManager")
 set(RESOURCES "${ROOT}/resources")
 
+file(READ "${RESOURCES}/token" TOKEN)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(STATIC_JDK_LINK OFF)
@@ -16,6 +18,7 @@ find_package(wxWidgets 3.2 REQUIRED core base xml)
 
 add_definitions(-DJDK="$ENV{JDK}")
 add_definitions(-DRESOURCES="${RESOURCES}")
+add_definitions(-DTOKEN="${TOKEN}")
 
 if(STATIC_JDK_LINK MATCHES ON)
 
@@ -50,9 +53,9 @@ endif()
 add_executable(${OUTPUT_NAME}
 
     src/main.cpp
-    #src/jnicloudelib.cpp
+    src/jnicloudelib.cpp
     src/cipher.cpp
-    #src/xmlfile.cpp
+    src/xmlfile.cpp
     #src/mainframe.cpp
 
     res/iv.o

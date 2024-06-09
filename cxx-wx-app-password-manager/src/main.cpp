@@ -1,4 +1,4 @@
-#define APP 3
+#define APP 6
 
 #if APP == 0
 
@@ -116,8 +116,8 @@ int main(int argc, char** argv)
     uchar data[SIZE_BUFFER] = { 0 };
     unsigned int size = SIZE_BUFFER;
 
-    CXMLFile::read(PATH_RES"/keys.xml", data, size);
-    CXMLFile::write(PATH_RES"/temp.xml", data, size);
+    CXMLFile::read(RESOURCES "/keys.xml", data, size);
+    CXMLFile::write(RESOURCES "/temp.xml", data, size);
 }
 
 #elif APP == 5
@@ -136,13 +136,13 @@ int main(int argc, char** argv)
     uchar dataWrite[SIZE_BUFFER] = { 0 };
     unsigned int sizeWrite = SIZE_BUFFER;
 
-    CXMLFile::read(PATH_RES"/keys.xml", dataRead, sizeRead);
+    CXMLFile::read(RESOURCES "/keys.xml", dataRead, sizeRead);
 
     CXMLFile::parse(dataRead, sizeRead, items);
 
     CXMLFile::collect(items, dataWrite, sizeWrite);
 
-    CXMLFile::write(PATH_RES"/temp.xml", dataWrite, sizeWrite);
+    CXMLFile::write(RESOURCES "/temp.xml", dataWrite, sizeWrite);
 }
 
 #elif APP == 6
@@ -154,8 +154,6 @@ int main(int argc, char** argv)
 #include "cipher.h"
 
 #define SIZE_BUFFER 8192
-#define TOKEN "<token>"
-// #define TOKEN <token>
 
 int main(int argc, char** argv)
 {
@@ -173,22 +171,22 @@ int main(int argc, char** argv)
 
         CXMLFile::read(RESOURCES "/keys.xml", dataDecrypt, sizeDecrypt);
 
-        CCipher::encrypt("0011", dataDecrypt, (int)sizeDecrypt, dataEncrypt, sizeEncrypt);
+        CCipher::encrypt("0011", dataDecrypt, sizeDecrypt, dataEncrypt, sizeEncrypt);
 
-        CXMLFile::write(RESOURCES "/keys_encrypt.txt", dataEncrypt, sizeEncrypt);
+        CXMLFile::write(RESOURCES "/keys_encrypt_upload.xml", dataEncrypt, sizeEncrypt);
 
-        jniCloudLib.run("upload", TOKEN, "test", RESOURCES "/keys_encrypt.txt");
+        jniCloudLib.run("upload", TOKEN, "test", RESOURCES "/keys_encrypt_upload.xml");
 
         memset(dataDecrypt, 0, sizeDecrypt = SIZE_BUFFER);
         memset(dataEncrypt, 0, sizeEncrypt = SIZE_BUFFER);
 
-        jniCloudLib.run("load", TOKEN, "test/keys_encrypt.txt", RESOURCES "/load.txt");
+        jniCloudLib.run("load", TOKEN, "test/keys_encrypt_upload.xml", RESOURCES "/keys_encrypt_load.xml");
 
-        CXMLFile::read(RESOURCES "/load.txt", dataEncrypt, sizeEncrypt);
+        CXMLFile::read(RESOURCES "/keys_encrypt_load.xml", dataEncrypt, sizeEncrypt);
 
-        CCipher::decrypt("0011", dataEncrypt, (int)sizeEncrypt, dataDecrypt, sizeDecrypt);
+        CCipher::decrypt("0011", dataEncrypt, sizeEncrypt, dataDecrypt, sizeDecrypt);
 
-        CXMLFile::write(RESOURCES "/keys_decrypt.txt", dataDecrypt, sizeDecrypt);
+        CXMLFile::write(RESOURCES "/keys_decrypt.xml", dataDecrypt, sizeDecrypt);
 
     } catch(const char* message) {
         std::cout << message << std::endl;
