@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             val list: MutableList<DItem> = mutableListOf()
 
             val rowCount: Int = tableLayout.childCount
-            for(iRow in 1 until rowCount) {
+            for(iRow in 0 until rowCount) {
 
                 val rowView: View = tableLayout.getChildAt(iRow)
                 if(rowView is TableRow) {
