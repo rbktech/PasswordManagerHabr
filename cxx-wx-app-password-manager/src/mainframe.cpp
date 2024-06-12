@@ -65,7 +65,7 @@ void CMainFrame::OnLoad(wxCommandEvent& WXUNUSED(event))
 
         CXMLFile::read(RESOURCES "/keys_encrypt_load.xml", mDataEncrypt, mSizeEncrypt);
 
-        CCipher::decrypt("1324", mDataEncrypt, mSizeEncrypt, mDataDecrypt, mSizeDecrypt);
+        CCipher::decrypt("0011", mDataEncrypt, mSizeEncrypt, mDataDecrypt, mSizeDecrypt);
 
         CXMLFile::parse(mDataDecrypt, mSizeDecrypt, mItems);
 
@@ -112,7 +112,7 @@ void CMainFrame::OnUpload(wxCommandEvent& WXUNUSED(event))
 
         CXMLFile::collect(mItems, mDataDecrypt, mSizeDecrypt);
 
-        CCipher::encrypt("1324", mDataDecrypt, mSizeDecrypt, mDataEncrypt, mSizeEncrypt);
+        CCipher::encrypt("0011", mDataDecrypt, mSizeDecrypt, mDataEncrypt, mSizeEncrypt);
 
         CXMLFile::write(RESOURCES "/keys_encrypt_upload.xml", mDataEncrypt, mSizeEncrypt);
 

@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    const char* password = "1324";
+    const char* password = "0011";
 
     uchar inData[SIZE_BUFFER] = { 0 };
     int inSize = SIZE_BUFFER;
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
 
         CXMLFile::read(RESOURCES "/keys.xml", dataDecrypt, sizeDecrypt);
 
-        CCipher::encrypt("1324", dataDecrypt, sizeDecrypt, dataEncrypt, sizeEncrypt);
+        CCipher::encrypt("0011", dataDecrypt, sizeDecrypt, dataEncrypt, sizeEncrypt);
 
         CXMLFile::write(RESOURCES "/keys_encrypt_upload.xml", dataEncrypt, sizeEncrypt);
 
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
 
         CXMLFile::read(RESOURCES "/keys_encrypt_load.xml", dataEncrypt, sizeEncrypt);
 
-        CCipher::decrypt("1324", dataEncrypt, sizeEncrypt, dataDecrypt, sizeDecrypt);
+        CCipher::decrypt("0011", dataEncrypt, sizeEncrypt, dataDecrypt, sizeDecrypt);
 
         CXMLFile::write(RESOURCES "/keys_decrypt.xml", dataDecrypt, sizeDecrypt);
 
