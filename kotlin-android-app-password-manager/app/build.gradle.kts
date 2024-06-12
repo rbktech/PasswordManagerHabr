@@ -34,8 +34,10 @@ android {
         jvmTarget = "1.8"
     }
 
-    packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+        }
     }
 }
 
