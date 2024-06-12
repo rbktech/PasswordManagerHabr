@@ -56,7 +56,7 @@ add_executable(${OUTPUT_NAME}
     src/jnicloudelib.cpp
     src/cipher.cpp
     src/xmlfile.cpp
-    #src/mainframe.cpp
+    src/mainframe.cpp
 
     res/iv.o
     res/salt.o

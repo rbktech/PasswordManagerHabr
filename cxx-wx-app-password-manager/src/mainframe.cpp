@@ -50,18 +50,22 @@ CMainFrame::CMainFrame()
 
 void CMainFrame::OnLoad(wxCommandEvent& WXUNUSED(event))
 {
+    int nRows = 0;
+
     mItems.clear();
     memset(mDataDecrypt, 0, mSizeDecrypt = SIZE_BUFFER);
     memset(mDataEncrypt, 0, mSizeEncrypt = SIZE_BUFFER);
-    mGrid->DeleteRows(0, mGrid->GetNumberRows());
+    nRows = mGrid->GetNumberRows();
+    if(nRows != 0)
+        mGrid->DeleteRows(0, mGrid->GetNumberRows());
 
     try {
 
-        mJNICloudLib.run("load", TOKEN, "test/keys_encrypt.txt", RESOURCES "/load.txt");
+        mJNICloudLib.run("load", TOKEN, "test/keys_encrypt_upload.xml", RESOURCES "/keys_encrypt_load.xml");
 
-        CXMLFile::read(RESOURCES "/load.txt", mDataEncrypt, mSizeEncrypt);
+        CXMLFile::read(RESOURCES "/keys_encrypt_load.xml", mDataEncrypt, mSizeEncrypt);
 
-        CCipher::decrypt("0011", mDataEncrypt, (int)mSizeEncrypt, mDataDecrypt, mSizeDecrypt);
+        CCipher::decrypt("1324", mDataEncrypt, mSizeEncrypt, mDataDecrypt, mSizeDecrypt);
 
         CXMLFile::parse(mDataDecrypt, mSizeDecrypt, mItems);
 
@@ -71,23 +75,26 @@ void CMainFrame::OnLoad(wxCommandEvent& WXUNUSED(event))
 
     for(auto& item : mItems) {
 
-        int nRows = mGrid->GetNumberRows();
+        nRows = mGrid->GetNumberRows();
         mGrid->AppendRows();
         mGrid->SetCellValue(nRows, INDEX_LABEL_TITLE, item.title);
         mGrid->SetCellValue(nRows, INDEX_LABEL_LOGIN, item.login);
         mGrid->SetCellValue(nRows, INDEX_LABEL_PASSWORD, item.password);
         mGrid->SetCellValue(nRows, INDEX_LABEL_TYPE, item.type);
-        this->Fit();
     }
+
+    this->Fit();
 }
 
 void CMainFrame::OnUpload(wxCommandEvent& WXUNUSED(event))
 {
+    int nRows = 0;
+
     mItems.clear();
     memset(mDataDecrypt, 0, mSizeDecrypt = SIZE_BUFFER);
     memset(mDataEncrypt, 0, mSizeEncrypt = SIZE_BUFFER);
 
-    int nRows = mGrid->GetNumberRows();
+    nRows = mGrid->GetNumberRows();
     for(int iRow = 0; iRow < nRows; iRow++) {
 
         SItem item;
@@ -105,11 +112,11 @@ void CMainFrame::OnUpload(wxCommandEvent& WXUNUSED(event))
 
         CXMLFile::collect(mItems, mDataDecrypt, mSizeDecrypt);
 
-        CCipher::encrypt("0011", mDataDecrypt, (int)mSizeDecrypt, mDataEncrypt, mSizeEncrypt);
+        CCipher::encrypt("1324", mDataDecrypt, mSizeDecrypt, mDataEncrypt, mSizeEncrypt);
 
-        CXMLFile::write(RESOURCES "/keys_encrypt.txt", mDataEncrypt, mSizeEncrypt);
+        CXMLFile::write(RESOURCES "/keys_encrypt_upload.xml", mDataEncrypt, mSizeEncrypt);
 
-        mJNICloudLib.run("upload", TOKEN, "test", RESOURCES "/keys_encrypt.txt");
+        mJNICloudLib.run("upload", TOKEN, "test", RESOURCES "/keys_encrypt_upload.xml");
 
     } catch(const char* message) {
         std::cout << message << std::endl;
