@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             val list: MutableList<DItem> = mutableListOf()
 
             val rowCount: Int = tableLayout.childCount
-            for(iRow in 0 until rowCount) {
+            for(iRow in 1 until rowCount) {
 
                 val rowView: View = tableLayout.getChildAt(iRow)
                 if(rowView is TableRow) {
@@ -135,18 +135,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val dataDecrypt: ByteArray = CXMLFile.collect(list)
-            if(dataDecrypt.isNotEmpty()) {
+            if(list.isNotEmpty()) {
 
-                mCipher?.let { cipher ->
+                val dataDecrypt: ByteArray = CXMLFile.collect(list)
+                if(dataDecrypt.isNotEmpty()) {
 
-                    val dataEncrypt: ByteArray? = cipher.process(mPassword, dataDecrypt, Cipher.ENCRYPT_MODE)
-                    if(dataEncrypt != null) {
+                    mCipher?.let { cipher ->
 
-                        CXMLFile.write(mPathLocal, dataEncrypt)
+                        val dataEncrypt: ByteArray? = cipher.process(mPassword, dataDecrypt, Cipher.ENCRYPT_MODE)
+                        if(dataEncrypt != null) {
 
-                        if(CloudLib.upload(mToken, "test", mPathLocal) == true) {
-                            mResult = "success"
+                            CXMLFile.write(mPathLocal, dataEncrypt)
+
+                            if(CloudLib.upload(mToken, "test", mPathLocal) == true) {
+                                mResult = "success"
+                            }
                         }
                     }
                 }

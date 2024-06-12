@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
+    }
 }
 
 dependencies {
@@ -42,10 +46,12 @@ dependencies {
             "dir" to "C:/PasswordManager/resources/library",
             "include" to listOf(
                 "cloud-lib.jar",
+                "commons-logging-1.2.jar",
+                "httpclient-4.5.13.jar",
+                "httpcore-4.4.16.jar",
+                "xmlpull-1.1.3.4a.jar"
             )
         )))
-
-    implementation("org.apache.httpcomponents:httpcore:4.4.16")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
