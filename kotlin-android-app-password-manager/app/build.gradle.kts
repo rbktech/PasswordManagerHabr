@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.tasks.factory.dependsOn
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -46,6 +44,8 @@ dependencies {
                 "cloud-lib.jar",
             )
         )))
+
+    implementation("org.apache.httpcomponents:httpcore:4.4.16")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")

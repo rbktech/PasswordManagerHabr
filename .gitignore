@@ -33,4 +33,13 @@
 
 # Project
 .idea
+.gradle
 *.iml
+cmake-build-debug
+cmake-build-release
+build
+token
+*.xml
+*.jar
+raw
+local.properties
